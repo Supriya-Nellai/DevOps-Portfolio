@@ -1,0 +1,29 @@
+name: DevOps Portfolio CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify HTML File
+        run: test -f index.html
+
+      - name: Verify CSS File
+        run: test -f style.css
+
+      - name: Verify Certificates Folder
+        run: test -d certificates
+
+      - name: Validate HTML Structure
+        run: grep -q "<!doctype html>" index.html
+
+      - name: CI Pipeline Success
+        run: echo "DevOps Portfolio Validation Passed"
